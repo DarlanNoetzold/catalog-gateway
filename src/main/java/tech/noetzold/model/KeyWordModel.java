@@ -19,4 +19,6 @@ public class KeyWordModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID keyWordId;
+
+    private String keyWord;
 }
