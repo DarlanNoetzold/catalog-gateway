@@ -1,12 +1,10 @@
 package tech.noetzold.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.wildfly.common.annotation.NotNull;
 
 import java.util.UUID;
 
@@ -19,4 +17,19 @@ public class MediaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID mediaId;
+
+    private String thumbnailImageURL;
+
+    private String smallImageUrl;
+
+    private String mediumImageUrl;
+
+    private String largeImageUrl;
+
+    private String zoomImageUrl;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "skuId")
+    private SkuModel sku;
 }
