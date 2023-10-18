@@ -1,4 +1,9 @@
 package tech.noetzold.repository;
 
-public class MediaRepository {
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+import tech.noetzold.model.MediaModel;
+
+@ApplicationScoped
+public class MediaRepository implements PanacheRepository<MediaModel> {
 }
