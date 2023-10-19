@@ -15,9 +15,9 @@ import java.util.UUID;
 
 @ApplicationScoped
 public class AttributeService {
+
     @Inject
     AttributeRepository attributeRepository;
-
 
     @Transactional
     @CacheResult(cacheName = "attribute")
