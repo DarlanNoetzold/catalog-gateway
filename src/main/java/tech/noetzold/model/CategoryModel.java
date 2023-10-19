@@ -1,15 +1,20 @@
 package tech.noetzold.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 import java.util.UUID;
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class CategoryModel {
 
     @Id
