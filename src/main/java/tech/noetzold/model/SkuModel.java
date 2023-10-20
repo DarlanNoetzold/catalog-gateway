@@ -22,8 +22,6 @@ public class SkuModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID skuId;
 
-    private Long id;
-
     private String displayName;
 
     private String partnerId;
