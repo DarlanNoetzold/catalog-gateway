@@ -22,8 +22,4 @@ public class CategoryModel {
     private UUID categoryId;
 
     private String name;
-
-    @OneToMany(mappedBy = "category")
-    @Fetch(FetchMode.JOIN)
-    private List<ProductModel> products;
 }
