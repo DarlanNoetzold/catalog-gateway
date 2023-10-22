@@ -27,7 +27,7 @@ public class AttributeController {
     private static final Logger logger = Logger.getLogger(AttributeController.class);
 
     @GET
-    @Path("/paymentId/{id}")
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response getAttributeModelById(@PathParam("id") String id){
         UUID uuid = UUID.fromString(id);
@@ -47,7 +47,7 @@ public class AttributeController {
     public Response saveAttributeModel(AttributeModel attributeModel){
         try {
             if (attributeModel.getName() == null) {
-                logger.error("Error to create Attribute withou name: " + attributeModel.getAttributeId());
+                logger.error("Error to create Attribute without name: " + attributeModel.getAttributeId());
                 return Response.status(Response.Status.BAD_REQUEST).build();
             }
             attributeModel.setAttributeId(null);
