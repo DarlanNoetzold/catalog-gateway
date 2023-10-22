@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import tech.noetzold.model.ProductModel;
 import tech.noetzold.model.SkuModel;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,5 +19,9 @@ public class SkuRepository implements PanacheRepository<SkuModel> {
 
     public void deleteById(UUID id) {
         delete("skuId", id);
+    }
+
+    public List<SkuModel> findByProductId(ProductModel productModel) {
+        return list("product", productModel);
     }
 }
