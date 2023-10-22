@@ -27,7 +27,7 @@ public class SkuController {
     private static final Logger logger = Logger.getLogger(SkuController.class);
 
     @GET
-    @Path("/paymentId/{id}")
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response getSkuModelById(@PathParam("id") String id){
         UUID uuid = UUID.fromString(id);
