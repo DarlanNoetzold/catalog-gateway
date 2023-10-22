@@ -38,15 +38,8 @@ public class SkuModel {
 
     private Boolean enabled;
 
+    @Embedded
     private Dimension packageDimensionModel;
-
-    private Dimension contentDimensionModel;
-
-    private List<AttributeModel> attributes;
-
-    @OneToMany(mappedBy = "sku")
-    @Fetch(FetchMode.JOIN)
-    private List<MediaModel> medias;
 
     @NotNull
     @ManyToOne
