@@ -48,7 +48,6 @@ public class SkuService {
 
         existingSkuModel.setAttributes(skuModel.getAttributes());
         existingSkuModel.setEan(skuModel.getEan());
-        existingSkuModel.setContentDimensionModel(skuModel.getContentDimensionModel());
         existingSkuModel.setEnabled(skuModel.getEnabled());
         existingSkuModel.setPackageDimensionModel(skuModel.getPackageDimensionModel());
         existingSkuModel.setDisplayName(skuModel.getDisplayName());
