@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.hibernate.Hibernate;
 import org.jboss.logging.Logger;
 import tech.noetzold.model.ProductModel;
 import tech.noetzold.model.SkuModel;
