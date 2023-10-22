@@ -1,4 +1,4 @@
-package tech.noetzold.customer;
+package tech.noetzold.consumer;
 
 import io.smallrye.reactive.messaging.annotations.Blocking;
 import io.smallrye.reactive.messaging.annotations.Merge;
@@ -22,9 +22,7 @@ public class AttributeConsumer {
     @Incoming("attributes")
     @Merge
     @Blocking
-    public AttributeModel process(JsonObject incomingAttributeModelInJson) {
-
-        AttributeModel incomingAttributeModel = incomingAttributeModelInJson.mapTo(AttributeModel.class);
+    public AttributeModel process(AttributeModel incomingAttributeModel) {
 
         attributeService.saveAttributeModel(incomingAttributeModel);
         logger.info("Create Attribute " + incomingAttributeModel.getAttributeId() + ".");
