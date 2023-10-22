@@ -27,7 +27,7 @@ public class CategoryController {
     private static final Logger logger = Logger.getLogger(CategoryController.class);
 
     @GET
-    @Path("/paymentId/{id}")
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response getCategoryModelById(@PathParam("id") String id){
         UUID uuid = UUID.fromString(id);
