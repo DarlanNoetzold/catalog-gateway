@@ -47,7 +47,6 @@ public class CategoryService {
         }
 
         existingCategoryModel.setName(categoryModel.getName());
-        existingCategoryModel.setProducts(categoryModel.getProducts());
 
         categoryRepository.persist(existingCategoryModel);
     }
