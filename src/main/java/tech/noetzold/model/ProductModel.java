@@ -59,10 +59,6 @@ public class ProductModel {
 
     private Boolean hasVariations;
 
-    @OneToMany(mappedBy = "product")
-    @Fetch(FetchMode.JOIN)
-    private List<SkuModel> skus;
-
     private Boolean allowAutomaticSkuMarketplaceCreation;
 
     private String code;
