@@ -1,11 +1,13 @@
 package tech.noetzold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.wildfly.common.annotation.NotNull;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
@@ -32,8 +34,9 @@ public class AttributeModel {
 
     private String priority;
 
+    @JsonIgnore
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "skuId")
     private SkuModel sku;
 
