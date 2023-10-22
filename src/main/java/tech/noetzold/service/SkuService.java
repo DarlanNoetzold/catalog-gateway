@@ -7,9 +7,11 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
+import tech.noetzold.model.ProductModel;
 import tech.noetzold.model.SkuModel;
 import tech.noetzold.repository.SkuRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,7 +48,6 @@ public class SkuService {
             throw new WebApplicationException("skuModel not found", Response.Status.NOT_FOUND);
         }
 
-        existingSkuModel.setAttributes(skuModel.getAttributes());
         existingSkuModel.setEan(skuModel.getEan());
         existingSkuModel.setEnabled(skuModel.getEnabled());
         existingSkuModel.setPackageDimensionModel(skuModel.getPackageDimensionModel());
@@ -55,7 +56,6 @@ public class SkuService {
         existingSkuModel.setProduct(skuModel.getProduct());
         existingSkuModel.setSalePrice(skuModel.getSalePrice());
         existingSkuModel.setStockLevel(skuModel.getStockLevel());
-        existingSkuModel.setMedias(skuModel.getMedias());
 
 
         skuRepository.persist(existingSkuModel);
@@ -65,5 +65,10 @@ public class SkuService {
     @CacheInvalidateAll(cacheName = "sku")
     public void deleteSkuModelById(UUID id){
         skuRepository.deleteById(id);
+    }
+
+    public List<SkuModel> findSkuModelByProductId(ProductModel productModel) {
+        List<SkuModel> listSkuModel = skuRepository.findByProductId(productModel);
+        return listSkuModel;
     }
 }
