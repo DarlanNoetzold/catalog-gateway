@@ -1,5 +1,7 @@
 package tech.noetzold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,8 +30,9 @@ public class MediaModel {
 
     private String zoomImageUrl;
 
+    @JsonIgnore
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "skuId")
     private SkuModel sku;
 }
