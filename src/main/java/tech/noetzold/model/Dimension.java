@@ -1,7 +1,10 @@
 package tech.noetzold.model;
 
+import jakarta.persistence.Embeddable;
+
 import java.math.BigDecimal;
 
+@Embeddable
 public class Dimension {
 
     private BigDecimal width;
