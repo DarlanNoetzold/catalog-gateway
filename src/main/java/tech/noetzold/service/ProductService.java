@@ -60,7 +60,6 @@ public class ProductService {
         existingProductModel.setLength(productModel.getLength());
         existingProductModel.setMessage(productModel.getMessage());
         existingProductModel.setPriceFactor(productModel.getPriceFactor());
-        existingProductModel.setSkus(productModel.getSkus());
         existingProductModel.setTitle(productModel.getTitle());
         existingProductModel.setWarrantyText(productModel.getWarrantyText());
         existingProductModel.setVideoUrl(productModel.getVideoUrl());
