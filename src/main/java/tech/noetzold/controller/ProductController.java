@@ -27,7 +27,7 @@ public class ProductController {
     private static final Logger logger = Logger.getLogger(ProductController.class);
 
     @GET
-    @Path("/paymentId/{id}")
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response getProductModelById(@PathParam("id") String id){
         UUID uuid = UUID.fromString(id);
