@@ -27,7 +27,7 @@ public class KeyWordController {
     private static final Logger logger = Logger.getLogger(KeyWordController.class);
 
     @GET
-    @Path("/paymentId/{id}")
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response getKeyWordModelById(@PathParam("id") String id){
         UUID uuid = UUID.fromString(id);
