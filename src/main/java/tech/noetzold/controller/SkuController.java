@@ -8,9 +8,12 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.jboss.logging.Logger;
+import tech.noetzold.model.ProductModel;
 import tech.noetzold.model.SkuModel;
+import tech.noetzold.service.ProductService;
 import tech.noetzold.service.SkuService;
 
+import java.util.List;
 import java.util.UUID;
 
 @Path("/api/catalog/v1/sku")
@@ -20,6 +23,9 @@ public class SkuController {
 
     @Inject
     SkuService skuService;
+
+    @Inject
+    ProductService productService;
 
     @Channel("skus")
     Emitter<SkuModel> quoteRequestEmitter;
@@ -40,6 +46,24 @@ public class SkuController {
         }
 
         return Response.ok(skuModel).build();
+    }
+
+    @GET
+    @Path("/getSkus/{id}")
+    @RolesAllowed("admin")
+    public Response getAllSkuByProductId(@PathParam("id") String id){
+        UUID uuid = UUID.fromString(id);
+
+        ProductModel productModel = productService.findProductModelById(uuid);
+
+        List<SkuModel> listSkuModel = skuService.findSkuModelByProductId(productModel);
+
+        if(listSkuModel.isEmpty()){
+            logger.error("There is no sku with product id: " + id);
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        return Response.ok(listSkuModel).build();
     }
 
     @POST
