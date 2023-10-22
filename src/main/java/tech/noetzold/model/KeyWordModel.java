@@ -1,12 +1,11 @@
 package tech.noetzold.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.wildfly.common.annotation.NotNull;
 
 import java.util.UUID;
 
@@ -21,4 +20,10 @@ public class KeyWordModel {
     private UUID keyWordId;
 
     private String keyWord;
+
+    @JsonIgnore
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "skuId")
+    private SkuModel sku;
 }
