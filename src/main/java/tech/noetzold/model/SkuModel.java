@@ -46,4 +46,12 @@ public class SkuModel {
     @JoinColumn(name = "productId")
     private ProductModel product;
 
+    @OneToMany(mappedBy = "sku", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MediaModel> medias;
+
+    @OneToMany(mappedBy = "sku", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AttributeModel> attributes;
+
+    @OneToMany(mappedBy = "sku", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<KeyWordModel> keywords;
 }
