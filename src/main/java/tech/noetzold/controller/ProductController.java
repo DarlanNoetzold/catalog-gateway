@@ -11,6 +11,7 @@ import org.jboss.logging.Logger;
 import tech.noetzold.model.ProductModel;
 import tech.noetzold.service.ProductService;
 
+import java.util.List;
 import java.util.UUID;
 
 @Path("/api/catalog/v1/product")
@@ -25,6 +26,18 @@ public class ProductController {
     Emitter<ProductModel> quoteRequestEmitter;
 
     private static final Logger logger = Logger.getLogger(ProductController.class);
+
+    @GET
+    @RolesAllowed("admin")
+    public Response getAll(@QueryParam("page") int page, @QueryParam("size") int size, @QueryParam("sortBy") String sortBy) {
+        if (page <= 0 || size <= 0) {
+            logger.error("Invalid page: " + page +" or size: "+ size);
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        List<ProductModel> productModels = productService.findAll(page, size,sortBy);
+        logger.info("Returned ProductModel quantity: " + productModels.size());
+        return Response.ok(productModels).build();
+    }
 
     @GET
     @Path("/{id}")
