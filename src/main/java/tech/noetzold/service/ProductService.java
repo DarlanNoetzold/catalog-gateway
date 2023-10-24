@@ -2,6 +2,8 @@ package tech.noetzold.service;
 
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -10,6 +12,7 @@ import jakarta.ws.rs.core.Response;
 import tech.noetzold.model.ProductModel;
 import tech.noetzold.repository.ProductRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,6 +21,15 @@ public class ProductService {
 
     @Inject
     ProductRepository productRepository;
+
+    @Transactional
+    public List<ProductModel> findAll(int page, int size, String sortBy) {
+        Sort sort = Sort.ascending(sortBy);
+        PanacheQuery<ProductModel> query = productRepository.findAll(sort);
+
+        int offset = (page - 1) * size;
+        return query.range(offset, (size-1)*page).list();
+    }
 
     @Transactional
     @CacheResult(cacheName = "product")
