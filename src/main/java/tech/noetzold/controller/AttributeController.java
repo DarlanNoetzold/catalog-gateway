@@ -66,7 +66,7 @@ public class AttributeController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updateAttributeModel(@PathParam("id") String id, AttributeModel updatedAttributeModel) {
-        if (id.isBlank() || updatedAttributeModel.getAttributeId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update attributeModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -77,12 +77,15 @@ public class AttributeController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedAttributeModel.setAttributeId(existingAttributeModel.getAttributeId());
+
         attributeService.updateAttributeModel(updatedAttributeModel);
 
         return Response.ok(updatedAttributeModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deleteAttributeModel(@PathParam("id") String id){
         if (id.isBlank()) {
