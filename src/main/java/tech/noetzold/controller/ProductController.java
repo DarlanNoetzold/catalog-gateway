@@ -79,7 +79,7 @@ public class ProductController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updateProductModel(@PathParam("id") String id, ProductModel updatedProductModel) {
-        if (id.isBlank() || updatedProductModel.getProductId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update productModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -90,12 +90,15 @@ public class ProductController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedProductModel.setProductId(existingProductModel.getProductId());
+
         productService.updateProductModel(updatedProductModel);
 
         return Response.ok(updatedProductModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deleteProductModel(@PathParam("id") String id){
         if (id.isBlank()) {
