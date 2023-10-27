@@ -91,7 +91,7 @@ public class SkuController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updateSkuModel(@PathParam("id") String id, SkuModel updatedSkuModel) {
-        if (id.isBlank() || updatedSkuModel.getSkuId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update skuModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -102,12 +102,15 @@ public class SkuController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedSkuModel.setSkuId(existingSkuModel.getSkuId());
+
         skuService.updateSkuModel(updatedSkuModel);
 
         return Response.ok(updatedSkuModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deleteSkuModel(@PathParam("id") String id){
         if (id.isBlank()) {
