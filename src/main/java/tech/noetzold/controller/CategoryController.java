@@ -66,7 +66,7 @@ public class CategoryController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updateCategoryModel(@PathParam("id") String id, CategoryModel updatedCategoryModel) {
-        if (id.isBlank() || updatedCategoryModel.getCategoryId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update categoryModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -77,12 +77,15 @@ public class CategoryController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedCategoryModel.setCategoryId(existingCategoryModel.getCategoryId());
+
         categoryService.updateCategoryModel(updatedCategoryModel);
 
         return Response.ok(updatedCategoryModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deleteCategoryModel(@PathParam("id") String id){
         if (id.isBlank()) {
