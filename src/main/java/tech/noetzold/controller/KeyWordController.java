@@ -66,7 +66,7 @@ public class KeyWordController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updateKeyWordModel(@PathParam("id") String id, KeyWordModel updatedKeyWordModel) {
-        if (id.isBlank() || updatedKeyWordModel.getKeyWordId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update keywordModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -77,12 +77,15 @@ public class KeyWordController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedKeyWordModel.setKeyWordId(existingKeyWordModel.getKeyWordId());
+
         keywordService.updateKeyWordModel(updatedKeyWordModel);
 
         return Response.ok(updatedKeyWordModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deleteKeyWordModel(@PathParam("id") String id){
         if (id.isBlank()) {
