@@ -46,8 +46,8 @@ public class MediaController {
     @RolesAllowed("admin")
     public Response saveMediaModel(MediaModel mediaModel){
         try {
-            if (mediaModel.getSku() == null) {
-                logger.error("Error to create Media without sku: " + mediaModel.getMediaId());
+            if (mediaModel.getThumbnailImageURL() == null) {
+                logger.error("Error to create Media without thumb: " + mediaModel.getSku());
                 return Response.status(Response.Status.BAD_REQUEST).build();
             }
             mediaModel.setMediaId(null);
@@ -66,7 +66,7 @@ public class MediaController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updateMediaModel(@PathParam("id") String id, MediaModel updatedMediaModel) {
-        if (id.isBlank() || updatedMediaModel.getMediaId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update mediaModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -77,12 +77,15 @@ public class MediaController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedMediaModel.setMediaId(existingMediaModel.getMediaId());
+
         mediaService.updateMediaModel(updatedMediaModel);
 
         return Response.ok(updatedMediaModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deleteMediaModel(@PathParam("id") String id){
         if (id.isBlank()) {
