@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.wildfly.common.annotation.NotNull;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -29,6 +30,10 @@ public class MediaModel {
     private String largeImageUrl;
 
     private String zoomImageUrl;
+
+    private Boolean integrated;
+
+    private Date integratedDate;
 
     @JsonIgnore
     @NotNull
