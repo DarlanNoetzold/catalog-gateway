@@ -56,7 +56,8 @@ public class SkuService {
         existingSkuModel.setProduct(skuModel.getProduct());
         existingSkuModel.setSalePrice(skuModel.getSalePrice());
         existingSkuModel.setStockLevel(skuModel.getStockLevel());
-
+        existingSkuModel.setIntegratedDate(skuModel.getIntegratedDate());
+        existingSkuModel.setIntegrated(skuModel.getIntegrated());
 
         skuRepository.persist(existingSkuModel);
     }
