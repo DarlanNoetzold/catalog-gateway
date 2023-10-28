@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,4 +23,8 @@ public class CategoryModel {
     private UUID categoryId;
 
     private String name;
+
+    private Boolean integrated;
+
+    private Date integratedDate;
 }
