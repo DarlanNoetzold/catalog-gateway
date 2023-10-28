@@ -52,6 +52,8 @@ public class MediaService {
         existingMediaModel.setMediumImageUrl(mediaModel.getMediumImageUrl());
         existingMediaModel.setZoomImageUrl(mediaModel.getZoomImageUrl());
         existingMediaModel.setThumbnailImageURL(mediaModel.getThumbnailImageURL());
+        existingMediaModel.setIntegrated(mediaModel.getIntegrated());
+        existingMediaModel.setIntegratedDate(mediaModel.getIntegratedDate());
 
 
         mediaRepository.persist(existingMediaModel);
