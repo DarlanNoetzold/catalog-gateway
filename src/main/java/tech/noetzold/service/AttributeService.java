@@ -53,6 +53,8 @@ public class AttributeService {
         existingAttributeModel.setHexCode(attributeModel.getHexCode());
         existingAttributeModel.setImageUrl(attributeModel.getImageUrl());
         existingAttributeModel.setInternalName(attributeModel.getInternalName());
+        existingAttributeModel.setIntegrated(attributeModel.getIntegrated());
+        existingAttributeModel.setIntegratedDate(attributeModel.getIntegratedDate());
 
         attributeRepository.persist(existingAttributeModel);
     }
