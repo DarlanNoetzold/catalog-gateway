@@ -78,7 +78,8 @@ public class ProductService {
         existingProductModel.setWarrantyTime(productModel.getWarrantyTime());
         existingProductModel.setWeight(productModel.getWeight());
         existingProductModel.setWidth(productModel.getWidth());
-
+        existingProductModel.setIntegratedDate(productModel.getIntegratedDate());
+        existingProductModel.setIntegrated(productModel.getIntegrated());
 
         productRepository.persist(existingProductModel);
     }
