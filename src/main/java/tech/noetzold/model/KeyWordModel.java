@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.wildfly.common.annotation.NotNull;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -26,4 +27,8 @@ public class KeyWordModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "skuId")
     private SkuModel sku;
+
+    private Boolean integrated;
+
+    private Date integratedDate;
 }
