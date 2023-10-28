@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.wildfly.common.annotation.NotNull;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -33,6 +34,10 @@ public class AttributeModel {
     private String internalName;
 
     private String priority;
+
+    private Boolean integrated;
+
+    private Date integratedDate;
 
     @JsonIgnore
     @NotNull
