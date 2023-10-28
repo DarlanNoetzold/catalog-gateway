@@ -47,6 +47,8 @@ public class CategoryService {
         }
 
         existingCategoryModel.setName(categoryModel.getName());
+        existingCategoryModel.setIntegrated(categoryModel.getIntegrated());
+        existingCategoryModel.setIntegratedDate(categoryModel.getIntegratedDate());
 
         categoryRepository.persist(existingCategoryModel);
     }
