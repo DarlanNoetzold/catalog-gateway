@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.wildfly.common.annotation.NotNull;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +36,10 @@ public class SkuModel {
     private Long stockLevel;
 
     private Boolean enabled;
+
+    private Boolean integrated;
+
+    private Date integratedDate;
 
     @Embedded
     private Dimension packageDimensionModel;
