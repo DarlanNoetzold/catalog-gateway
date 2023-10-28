@@ -9,6 +9,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.wildfly.common.annotation.NotNull;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,5 +65,9 @@ public class ProductModel {
     private String code;
 
     private String message;
+
+    private Boolean integrated;
+
+    private Date integratedDate;
 
 }
