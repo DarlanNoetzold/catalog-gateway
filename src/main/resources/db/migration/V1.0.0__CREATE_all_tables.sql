@@ -1,23 +1,18 @@
 -- Table: public.categorymodel
-
--- DROP TABLE IF EXISTS public.categorymodel;
-
 CREATE TABLE IF NOT EXISTS public.categorymodel
 (
     categoryid uuid NOT NULL,
     name character varying(255) COLLATE pg_catalog."default",
+    integrated boolean, -- Add the integrated boolean field here
+    integratedDate date, -- Add the integratedDate date field here
     CONSTRAINT categorymodel_pkey PRIMARY KEY (categoryid)
 )
-
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.categorymodel
     OWNER to postgres;
 
 -- Table: public.productmodel
-
--- DROP TABLE IF EXISTS public.productmodel;
-
 CREATE TABLE IF NOT EXISTS public.productmodel
 (
     allowautomaticskumarketplacecreation boolean,
@@ -41,23 +36,20 @@ CREATE TABLE IF NOT EXISTS public.productmodel
     pricefactor bytea,
     weight bytea,
     width bytea,
+    integrated boolean, -- Add the integrated boolean field here
+    integratedDate date, -- Add the integratedDate date field here
     CONSTRAINT productmodel_pkey PRIMARY KEY (productid),
     CONSTRAINT fktmpfd90i3i23kjmtklssmbipg FOREIGN KEY (categoryid)
         REFERENCES public.categorymodel (categoryid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
-
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.productmodel
     OWNER to postgres;
 
-
 -- Table: public.skumodel
-
--- DROP TABLE IF EXISTS public.skumodel;
-
 CREATE TABLE IF NOT EXISTS public.skumodel
 (
     enabled boolean,
@@ -76,23 +68,20 @@ CREATE TABLE IF NOT EXISTS public.skumodel
     lwhuom character varying(255) COLLATE pg_catalog."default",
     partnerid character varying(255) COLLATE pg_catalog."default",
     weightuom character varying(255) COLLATE pg_catalog."default",
+    integrated boolean, -- Add the integrated boolean field here
+    integratedDate date, -- Add the integratedDate date field here
     CONSTRAINT skumodel_pkey PRIMARY KEY (skuid),
     CONSTRAINT fkmlvwji7h8sw53untyx0n6bq9i FOREIGN KEY (productid)
         REFERENCES public.productmodel (productid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
-
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.skumodel
     OWNER to postgres;
 
-
 -- Table: public.attributemodel
-
--- DROP TABLE IF EXISTS public.attributemodel;
-
 CREATE TABLE IF NOT EXISTS public.attributemodel
 (
     attributeid uuid NOT NULL,
@@ -104,43 +93,39 @@ CREATE TABLE IF NOT EXISTS public.attributemodel
     name character varying(255) COLLATE pg_catalog."default",
     priority character varying(255) COLLATE pg_catalog."default",
     type character varying(255) COLLATE pg_catalog."default",
+    integrated boolean, -- Add the integrated boolean field here
+    integratedDate date, -- Add the integratedDate date field here
     CONSTRAINT attributemodel_pkey PRIMARY KEY (attributeid),
     CONSTRAINT fkjlqnum2r8hox63aai6kbsug2s FOREIGN KEY (skuid)
         REFERENCES public.skumodel (skuid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
-
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.attributemodel
     OWNER to postgres;
 
 -- Table: public.keywordmodel
-
--- DROP TABLE IF EXISTS public.keywordmodel;
-
 CREATE TABLE IF NOT EXISTS public.keywordmodel
 (
     keywordid uuid NOT NULL,
     skuid uuid,
     keyword character varying(255) COLLATE pg_catalog."default",
+    integrated boolean, -- Add the integrated boolean field here
+    integratedDate date, -- Add the integratedDate date field here
     CONSTRAINT keywordmodel_pkey PRIMARY KEY (keywordid),
     CONSTRAINT fkt5t4dcldjk08dfis2mxyn2sit FOREIGN KEY (skuid)
         REFERENCES public.skumodel (skuid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
-
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.keywordmodel
     OWNER to postgres;
 
 -- Table: public.mediamodel
-
--- DROP TABLE IF EXISTS public.mediamodel;
-
 CREATE TABLE IF NOT EXISTS public.mediamodel
 (
     mediaid uuid NOT NULL,
@@ -150,13 +135,14 @@ CREATE TABLE IF NOT EXISTS public.mediamodel
     smallimageurl character varying(255) COLLATE pg_catalog."default",
     thumbnailimageurl character varying(255) COLLATE pg_catalog."default",
     zoomimageurl character varying(255) COLLATE pg_catalog."default",
+    integrated boolean, -- Add the integrated boolean field here
+    integratedDate date, -- Add the integratedDate date field here
     CONSTRAINT mediamodel_pkey PRIMARY KEY (mediaid),
     CONSTRAINT fkkf99ds3sq269uw0twltsk5et8 FOREIGN KEY (skuid)
         REFERENCES public.skumodel (skuid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
-
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.mediamodel
