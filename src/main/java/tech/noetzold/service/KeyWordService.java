@@ -47,6 +47,8 @@ public class KeyWordService {
         }
 
         existingKeyWordModel.setKeyWord(keyWordModel.getKeyWord());
+        existingKeyWordModel.setIntegrated(keyWordModel.getIntegrated());
+        existingKeyWordModel.setIntegratedDate(keyWordModel.getIntegratedDate());
 
         keyWordRepository.persist(existingKeyWordModel);
     }
