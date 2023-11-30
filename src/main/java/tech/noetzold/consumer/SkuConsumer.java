@@ -8,6 +8,7 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.noetzold.model.SkuModel;
+import tech.noetzold.service.CatalogService;
 import tech.noetzold.service.SkuService;
 
 @ApplicationScoped
@@ -16,13 +17,16 @@ public class SkuConsumer {
     @Inject
     SkuService skuService;
 
+    @Inject
+    CatalogService catalogService;
+
     private static final Logger logger = LoggerFactory.getLogger(SkuConsumer.class);
 
     @Incoming("skus")
     @Merge
     @Blocking
     public SkuModel process(SkuModel incomingSkuModel) {
-
+        catalogService.sendSku(incomingSkuModel);
         skuService.saveSkuModel(incomingSkuModel);
         logger.info("Create Sku " + incomingSkuModel.getSkuId() + ".");
 
