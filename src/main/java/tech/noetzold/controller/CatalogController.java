@@ -1,12 +1,15 @@
 package tech.noetzold.controller;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import tech.noetzold.model.AttributeModel;
 import tech.noetzold.service.*;
+
+import java.util.UUID;
 
 @Path("/api/catalog/sendUpdateNotification")
 @Produces(MediaType.APPLICATION_JSON)
@@ -34,5 +37,13 @@ public class CatalogController {
     @Inject
     SkuService skuService;
 
-    
+    @GET
+    @RolesAllowed("admin")
+    public Response getAttributeModelById(){
+        attributeService.findAllAttributeModel();
+
+        return Response.ok(attributeModel).build();
+    }
+
+
 }
