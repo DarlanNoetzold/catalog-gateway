@@ -2,6 +2,7 @@ package tech.noetzold.service;
 
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 import tech.noetzold.model.AttributeModel;
 import tech.noetzold.repository.AttributeRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +27,12 @@ public class AttributeService {
         Optional<AttributeModel> optionalAttributeModel = attributeRepository.findByIdOptional(id);
         return optionalAttributeModel.orElse(new AttributeModel());
     }
+    @Transactional
+    public List<AttributeModel> findAllAttributeModel(){
+        PanacheQuery<AttributeModel> allAttributeModel = attributeRepository.findAll();
+        return allAttributeModel.list();
+    }
+
 
     @Transactional
     @CacheInvalidateAll(cacheName = "attribute")
