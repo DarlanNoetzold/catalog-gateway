@@ -9,6 +9,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import tech.noetzold.model.AttributeModel;
+import tech.noetzold.model.KeyWordModel;
 import tech.noetzold.service.*;
 
 import java.util.List;
@@ -43,12 +44,28 @@ public class CatalogController {
     @Channel("attributes")
     Emitter<AttributeModel> quoteRequestEmitterAttribute;
 
+    @Channel("keywords")
+    Emitter<KeyWordModel> quoteRequestEmitterKeyWord;
+
+    @Channel("medias")
+    Emitter<KeyWordModel> quoteRequestEmitterMedia;
+
+    @Channel("products")
+    Emitter<KeyWordModel> quoteRequestEmitterProduct;
+
+    @Channel("skus")
+    Emitter<KeyWordModel> quoteRequestEmitterSku;
+
     @GET
     @RolesAllowed("admin")
     public Response getAttributeModelById(){
+
         for (AttributeModel attributeModel: attributeService.findAllAttributeModel()) {
             quoteRequestEmitterAttribute.send(attributeModel);
         }
+
+        
+
 
 
         return Response.ok().build();
