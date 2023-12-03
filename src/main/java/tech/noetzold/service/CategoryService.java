@@ -2,14 +2,17 @@ package tech.noetzold.service;
 
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
+import tech.noetzold.model.AttributeModel;
 import tech.noetzold.model.CategoryModel;
 import tech.noetzold.repository.CategoryRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,6 +27,12 @@ public class CategoryService {
     public CategoryModel findCategoryModelById(UUID id){
         Optional<CategoryModel> optionalCategoryModel = categoryRepository.findByIdOptional(id);
         return optionalCategoryModel.orElse(new CategoryModel());
+    }
+
+    @Transactional
+    public List<CategoryModel> findAllCategoryModel(){
+        PanacheQuery<CategoryModel> allCategoryModel = categoryRepository.findAll();
+        return allCategoryModel.list();
     }
 
     @Transactional
