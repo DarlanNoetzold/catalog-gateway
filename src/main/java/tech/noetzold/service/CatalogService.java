@@ -3,7 +3,6 @@ package tech.noetzold.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import tech.noetzold.client.ApiServiceClient;
 import tech.noetzold.client.CatalogClient;
 import tech.noetzold.model.*;
 
