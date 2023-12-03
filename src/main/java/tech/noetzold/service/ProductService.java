@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import tech.noetzold.model.ProductModel;
+import tech.noetzold.model.ProductModel;
 import tech.noetzold.repository.ProductRepository;
 
 import java.util.List;
@@ -29,6 +30,12 @@ public class ProductService {
 
         int offset = (page - 1) * size;
         return query.range(offset, (size-1)*page).list();
+    }
+
+    @Transactional
+    public List<ProductModel> findAllProductModel(){
+        PanacheQuery<ProductModel> allProductModel = productRepository.findAll();
+        return allProductModel.list();
     }
 
     @Transactional
