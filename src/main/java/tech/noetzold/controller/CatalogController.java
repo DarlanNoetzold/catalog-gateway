@@ -8,8 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
-import tech.noetzold.model.AttributeModel;
-import tech.noetzold.model.KeyWordModel;
+import tech.noetzold.model.*;
 import tech.noetzold.service.*;
 
 import java.util.List;
@@ -44,29 +43,48 @@ public class CatalogController {
     @Channel("attributes")
     Emitter<AttributeModel> quoteRequestEmitterAttribute;
 
+    @Channel("categories")
+    Emitter<CategoryModel> quoteRequestEmitterCategory;
+
     @Channel("keywords")
     Emitter<KeyWordModel> quoteRequestEmitterKeyWord;
 
     @Channel("medias")
-    Emitter<KeyWordModel> quoteRequestEmitterMedia;
+    Emitter<MediaModel> quoteRequestEmitterMedia;
 
     @Channel("products")
-    Emitter<KeyWordModel> quoteRequestEmitterProduct;
+    Emitter<ProductModel> quoteRequestEmitterProduct;
 
     @Channel("skus")
-    Emitter<KeyWordModel> quoteRequestEmitterSku;
+    Emitter<SkuModel> quoteRequestEmitterSku;
 
     @GET
     @RolesAllowed("admin")
-    public Response getAttributeModelById(){
+    public Response indexing(){
 
         for (AttributeModel attributeModel: attributeService.findAllAttributeModel()) {
             quoteRequestEmitterAttribute.send(attributeModel);
         }
 
-        
+        for (CategoryModel categoryModel: categoryService.findAllCategoryModel()) {
+            quoteRequestEmitterCategory.send(categoryModel);
+        }
 
+        for (KeyWordModel keyWordModel: keyWordService.findAllAKeyWordModel()) {
+            quoteRequestEmitterKeyWord.send(keyWordModel);
+        }
 
+        for (MediaModel mediaModel: mediaService.findAllMediaModel()) {
+            quoteRequestEmitterMedia.send(mediaModel);
+        }
+
+        for (ProductModel productModel: productService.findAllProductModel()) {
+            quoteRequestEmitterProduct.send(productModel);
+        }
+
+        for (SkuModel skuModel: skuService.findAllSkuModel()) {
+            quoteRequestEmitterSku.send(skuModel);
+        }
 
         return Response.ok().build();
     }
