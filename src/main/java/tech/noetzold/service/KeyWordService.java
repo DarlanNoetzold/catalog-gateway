@@ -2,14 +2,17 @@ package tech.noetzold.service;
 
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
+import tech.noetzold.model.AttributeModel;
 import tech.noetzold.model.KeyWordModel;
 import tech.noetzold.repository.KeyWordRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,6 +27,12 @@ public class KeyWordService {
     public KeyWordModel findKeyWordModelById(UUID id){
         Optional<KeyWordModel> optionalKeyWordModel = keyWordRepository.findByIdOptional(id);
         return optionalKeyWordModel.orElse(new KeyWordModel());
+    }
+
+    @Transactional
+    public List<KeyWordModel> findAllAKeyWordModel(){
+        PanacheQuery<KeyWordModel> allKeyWordModel = keyWordRepository.findAll();
+        return allKeyWordModel.list();
     }
 
     @Transactional
