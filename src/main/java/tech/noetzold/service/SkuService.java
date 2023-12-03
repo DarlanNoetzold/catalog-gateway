@@ -2,6 +2,7 @@ package tech.noetzold.service;
 
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -26,6 +27,12 @@ public class SkuService {
     public SkuModel findSkuModelById(UUID id){
         Optional<SkuModel> optionalSkuModel = skuRepository.findByIdOptional(id);
         return optionalSkuModel.orElse(new SkuModel());
+    }
+
+    @Transactional
+    public List<SkuModel> findAllSkuModel(){
+        PanacheQuery<SkuModel> allSkuModel = skuRepository.findAll();
+        return allSkuModel.list();
     }
 
     @Transactional
