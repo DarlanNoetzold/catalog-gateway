@@ -8,6 +8,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tech.noetzold.consumer.SkuConsumer;
 import tech.noetzold.model.*;
 import tech.noetzold.service.*;
 
@@ -21,9 +24,6 @@ public class CatalogController {
 
     @Inject
     AttributeService attributeService;
-
-    @Inject
-    CatalogService catalogService;
 
     @Inject
     CategoryService categoryService;
@@ -58,9 +58,13 @@ public class CatalogController {
     @Channel("skus")
     Emitter<SkuModel> quoteRequestEmitterSku;
 
+    private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
+
     @GET
     @RolesAllowed("admin")
     public Response indexing(){
+
+        logger.info("Init Indexing");
 
         for (AttributeModel attributeModel: attributeService.findAllAttributeModel()) {
             quoteRequestEmitterAttribute.send(attributeModel);
@@ -85,6 +89,8 @@ public class CatalogController {
         for (SkuModel skuModel: skuService.findAllSkuModel()) {
             quoteRequestEmitterSku.send(skuModel);
         }
+
+        logger.info("Finish Indexing");
 
         return Response.ok().build();
     }
