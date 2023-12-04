@@ -26,7 +26,7 @@ public class MediaConsumer {
     @Merge
     @Blocking
     public MediaModel process(MediaModel incomingMediaModel) {
-
+        catalogService.sendMedia(incomingMediaModel);
         mediaService.saveMediaModel(incomingMediaModel);
         logger.info("Create Media " + incomingMediaModel.getMediaId() + ".");
 
