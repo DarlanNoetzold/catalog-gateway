@@ -10,7 +10,8 @@
 * Docker para CI/CD;
 * Keycloak para Authorization e Authetication;
 * Rest Assured e Junit5 para testes de integração;
-* FeignClient para comunicar com o Ecommerce.
+* FeignClient para comunicar com o Ecommerce;
+* Docker para implantação.
 
 ## Projeto
 * Este Gateway de Catalogo será utilizado para um Ecommerce;
